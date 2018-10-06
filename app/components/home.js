@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    FlatList,
-    View,
-    Text,
-    ActivityIndicator, TouchableHighlight, ActionSheetIOS
-} from 'react-native';
+import { StyleSheet, FlatList, View, Text, ActivityIndicator, TouchableHighlight, ActionSheetIOS} from 'react-native';
 
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
