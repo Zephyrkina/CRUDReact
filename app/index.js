@@ -15,10 +15,9 @@ class Main extends Component {
 
     componentDidMount() {
         var _this = this;
-        //Check if any data exist
+
         AsyncStorage.getItem('data', (err, data) => {
-            //if it doesn't exist, extract from json file
-            //save the initial data in Async
+
             if (data === null){
                 AsyncStorage.setItem('data', JSON.stringify(Data.quotes));
                 _this.props.getQuotes();
@@ -38,5 +37,5 @@ class Main extends Component {
     }
 }
 
-//Connect everything
+
 export default connect(null, { getQuotes })(Main);

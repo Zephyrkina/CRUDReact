@@ -6,13 +6,13 @@ export const DELETE_QUOTE = 'DELETE_QUOTE';
 import {AsyncStorage} from "react-native";
 
 
-// Add Quote - CREATE (C)
+
 export function addQuote(quote){
     return (dispatch) => {
         AsyncStorage.getItem('data', (err, quotes) => {
             if (quotes !== null){
                 quotes = JSON.parse(quotes);
-                quotes.unshift(quote); //add the new quote to the top
+                quotes.unshift(quote);
                 AsyncStorage.setItem('data', JSON.stringify(quotes), () => {
                     dispatch({type: ADD_QUOTE, quote:quote});
                 });
@@ -21,7 +21,7 @@ export function addQuote(quote){
     };
 }
 
-// Get Data - READ (R)
+
 export function getQuotes(){
     return (dispatch) => {
         AsyncStorage.getItem('data', (err, quotes) => {
@@ -32,13 +32,13 @@ export function getQuotes(){
     };
 }
 
-// Update Quote - UPDATE (U)
+
 export function updateQuote(quote){
     return (dispatch) => {
         AsyncStorage.getItem('data', (err, quotes) => {
             if (quotes !== null){
                 quotes = JSON.parse(quotes);
-                var index = getIndex(quotes, quote.id); //find the index of the quote with the id passed
+                var index = getIndex(quotes, quote.id);
                 if (index !== -1) {
                     quotes[index]['author'] = quote.author;
                     quotes[index]['quote'] = quote.quote;
@@ -51,15 +51,15 @@ export function updateQuote(quote){
     };
 }
 
-// Delete Quote - DELETE (D)
+
 export function deleteQuote(id){
     return (dispatch) => {
         AsyncStorage.getItem('data', (err, quotes) => {
             if (quotes !== null){
                 quotes = JSON.parse(quotes);
 
-                var index = getIndex(quotes, id); //find the index of the quote with the id passed
-                if(index !== -1) quotes.splice(index, 1);//if yes, undo, remove the QUOTE
+                var index = getIndex(quotes, id);
+                if(index !== -1) quotes.splice(index, 1);
                 AsyncStorage.setItem('data', JSON.stringify(quotes), () => {
                     dispatch({type: DELETE_QUOTE, id:id});
                 });

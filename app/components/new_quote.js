@@ -84,7 +84,7 @@ class NewQuote extends Component {
 
 }
 
-//Connect everything
+
 export default connect(null, {addQuote, updateQuote})(NewQuote);
 
 var styles = StyleSheet.create({

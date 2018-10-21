@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
-import { QUOTES_AVAILABLE, ADD_QUOTE, UPDATE_QUOTE, DELETE_QUOTE } from "../actions/" //Import the actions types constant we defined in our actions
+import { QUOTES_AVAILABLE, ADD_QUOTE, UPDATE_QUOTE, DELETE_QUOTE } from "../actions/"
 
 let dataState = { quotes: [], loading:true };
 
 const dataReducer = (state = dataState, action) => {
     switch (action.type) {
         case ADD_QUOTE:{
-            let quotes =  cloneObject(state.quotes) //clone the current state
-            quotes.unshift(action.quote); //add the new quote to the top
+            let quotes =  cloneObject(state.quotes)
+            quotes.unshift(action.quote);
             state = Object.assign({}, state, { quotes: quotes});
             return state;
         }
@@ -19,8 +19,8 @@ const dataReducer = (state = dataState, action) => {
 
         case UPDATE_QUOTE:{
             let quote = action.quote;
-            let quotes =  cloneObject(state.quotes) //clone the current state
-            let index = getIndex(quotes, quote.id); //find the index of the quote with the quote id passed
+            let quotes =  cloneObject(state.quotes)
+            let index = getIndex(quotes, quote.id);
             if (index !== -1) {
                 quotes[index]['author'] = quote.author;
                 quotes[index]['text'] = quote.text;
@@ -30,9 +30,9 @@ const dataReducer = (state = dataState, action) => {
         }
 
         case DELETE_QUOTE:{
-            let quotes =  cloneObject(state.quotes) //clone the current state
-            let index = getIndex(quotes, action.id); //find the index of the quote with the id passed
-            if(index !== -1) quotes.splice(index, 1);//if yes, undo, remove the QUOTE
+            let quotes =  cloneObject(state.quotes)
+            let index = getIndex(quotes, action.id);
+            if(index !== -1) quotes.splice(index, 1);
             state = Object.assign({}, state, { quotes: quotes});
             return state;
         }
@@ -52,7 +52,7 @@ function getIndex(data, id){
     return clone.findIndex((obj) => parseInt(obj.id) === parseInt(id));
 }
 
-// Combine all the reducers
+
 const rootReducer = combineReducers({
   dataReducer
 })
